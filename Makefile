@@ -8,3 +8,6 @@ release: build
 
 build:
 	@docker build -t $(PGROUP)/$(PNAME):$(TAG) .
+
+deploy:
+	curl -X POST -H 'TOKEN: $(DEPLOY_TOKEN)' http://d.imega.ru -d '{"namespace":"$(PGROUP)", "project_name":"$(PNAME)", "tag":"$(TAG)"}'
