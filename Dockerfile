@@ -1,6 +1,9 @@
-FROM nginx:1.13-alpine
+FROM openresty/openresty:alpine
 
 EXPOSE 80
 
 COPY conf.d /etc/nginx/conf.d
-COPY nginx.conf /etc/nginx/nginx.conf
+COPY src/ /app
+COPY nginx.conf /nginx.conf
+
+CMD ["openresty", "-g", "daemon off;", "-p", "/app", "-c", "/nginx.conf"]
