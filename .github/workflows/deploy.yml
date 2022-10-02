@@ -1,0 +1,17 @@
+name: Deploy
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: self-hosted
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Build&Test
+        run: make release TAG=${GITHUB_SHA:0:12}
+
+      - name: Deploy
+        run: make deploy
